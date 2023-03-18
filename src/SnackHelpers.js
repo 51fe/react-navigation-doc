@@ -135,7 +135,7 @@ function appendSnackLink() {
     link.target = '_blank';
 
     if (label) {
-      link.innerHTML = `在 Snack 上试试"${label}"示例 ${openIcon}`;
+      link.innerHTML = `在 Snack 上试试“${label}”示例 ${openIcon}`;
     } else {
       link.innerHTML = `在 Snack 上试试这个例子 ${openIcon}`;
     }

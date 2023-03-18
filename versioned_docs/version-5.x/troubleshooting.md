@@ -48,7 +48,7 @@ npm install name-of-the-module
 
 有时错误可能是这样的：
 
-```sh
+```text
 Error: While trying to resolve module "@react-navigation/native" from file "/path/to/src/App.js", the package "/path/to/node_modules/@react-navigation/native/package.json" was successfully found. However, this package itself specifies a "main" module field that could not be resolved ("/path/to/node_modules/@react-navigation/native/src/index.tsx"
 ```
 
@@ -216,14 +216,14 @@ export default function App() {
 
 ## 警告：“Non-serializable values were found in the navigation state”
 
-如果您在参数中传递不可序列化的值，例如类实例、函数等，则可能会发生这种情况。在这种情况下，React Navigation 会警告您，因为这可能会破坏其他功能，例如[状态的持久性](state-persistence.md)、[深度链接](deep-links.md)等。
+如果您在参数中传递不可序列化的值，例如类实例、函数等，则可能会发生这种情况。在这种情况下，React Navigation 会警告您，因为这可能会破坏其他功能，例如[状态的持久性](state-persistence.md)、[深度链接](deep-linking.md)等。
 
 下面是一些用参数传递函数的例子:
 
-- 在标题按钮中传递一个回调函数，这可以通过使用`navigation.setOptions` 来实现。有关示例，请参阅[标题按钮指南](header-buttons.md#header-interaction-with-its-screen-component) 。
+- 在标题按钮中传递一个回调函数，这可以通过使用`navigation.setOptions` 来实现。有关示例，请参阅[标题按钮指南](header-buttons.md#导航栏与其屏幕组件的交互) 。
 - 传递一个回调给下一个屏幕，可以调用这个回调来传递一些数据。通常可以使用 `navigate` 来实现。请参阅[参数指南](params.md)示例。
-- 将复杂数据传递到另一个屏幕。您可以将复杂的数据存储在其他地方 (比如全局存储)，并传递一个 id，而不是传递数据 `params`。然后屏幕可以使用 id 从全局存储中获取数据。请参阅[参数中应该包含什么](params.md#what-should-be-in-params)。
-- 从父屏幕向子屏幕传递数据、回调等。您可以使用 React Context，或者传递一个 children 回调函数来传递这些参数，而不是使用参数。请参阅[传递额外 props](hello-react-navigation.md#passing-additional-props)。
+- 将复杂数据传递到另一个屏幕。您可以将复杂的数据存储在其他地方 (比如全局存储)，并传递一个 id，而不是传递数据 `params`。然后屏幕可以使用 id 从全局存储中获取数据。请参阅[参数中应该包含什么](params.md#参数中应该包含什么)。
+- 从父屏幕向子屏幕传递数据、回调等。您可以使用 React Context，或者传递一个 children 回调函数来传递这些参数，而不是使用参数。请参阅[传递额外 props](hello-react-navigation.md#传递额外 props)。
 
 如果您不使用状态持久性或到接受参数函数的屏幕深链接，那么警告不会影响您，您可以安全地忽略它。要忽略警告，您可以使用 `YellowBox.ignoreWarnings`。
 

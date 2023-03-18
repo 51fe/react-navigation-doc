@@ -6,6 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+
   --ifm-color-primary: #6b52ae;
   --ifm-color-primary-dark: #60499d;
   --ifm-color-primary-darker: #5b4594;
@@ -48,6 +49,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
 }
 
+body {
+  font-family: Consolas, 'Courier New', monospace;
+}
+
 .menu {
   font-weight: var(--ifm-font-weight-normal);
 }
@@ -56,7 +61,7 @@
   background: transparent;
 }
 
-.menu__list-item-collapsible > .menu__link {
+.menu__list-item-collapsible>.menu__link {
   font-weight: var(--ifm-font-weight-semibold);
 }
 

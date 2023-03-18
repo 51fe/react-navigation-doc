@@ -8,7 +8,7 @@ sidebar_label: 导航的生命周期
 
 在这种情况下，一个重要的问题是:当我们离开它或者回到它的时候，`Home` 会发生什么？路由如何发现用户是离开了它还是回到了它呢？
 
-如果您从 web 背景进行 react-navigation ，您可以假设当用户从路 `A` 导航到路由 `B`时，`A`将卸载（调用它的 `componentWillUnmount`），当用户返回到它时，`A`将再次挂载。虽然这些 React 生命周期方法仍然有效并用于 react-navigation，但它们的用法与 web 不同。这是由更复杂的移动导航需求驱动的。
+如果您从 web 背景进行 react-navigation ，您可以假设当用户从路 `A` 导航到路由 `B`时，`A` 将卸载（调用它的 `componentWillUnmount`），当用户返回到它时，`A`将再次挂载。虽然这些 React 生命周期方法仍然有效并用于 react-navigation，但它们的用法与 web 不同。这是由更复杂的移动导航需求驱动的。
 
 
 ## 示例场景
@@ -51,7 +51,7 @@ function App() {
 }
 ```
 
-我们从 `HomeScreen` 开始，浏览到 `DetailsScreen` 屏幕。然后我们使用标签栏切换到 `SettingsScreen` 并导航到 `ProfileScreen`。完成这一系列操作之后，所有 4 个屏幕都被挂载了! 如果您使用标签栏切换回 `HomeStack`，您会注意到您将看到 `DetailsScreen`——`HomeStack` 的导航状态被保留了!
+我们从 `HomeScreen` 开始，浏览到 `DetailsScreen` 屏幕。然后我们使用标签栏切换到 `SettingsScreen` 并导航到 `ProfileScreen`。完成这一系列操作之后，所有 4 个屏幕都被挂载了！如果您使用标签栏切换回 `HomeStack`，您会注意到您将看到 `DetailsScreen`——`HomeStack` 的导航状态被保留了！
 
 ## React Navigation 生命周期事件
 

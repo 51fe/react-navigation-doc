@@ -4,7 +4,7 @@ title: 在屏幕之间移动
 sidebar_label: 在屏幕之间移动
 ---
 
-在前一节 [“你好 React Navigation”](hello-react-navigation.md) 中，我们定义了一个有两个路由堆栈导航器（`Home` 和 `Details`），但是我们没有学习如何让用户从 `Home` 导航到 `Details`(虽然我们确实学习了在代码中如何改变*最初的*路由，但强迫用户克隆存储库和改变在我们的代码中路由来看到另一个屏幕上，可以说是可以想象得到的最糟糕的用户体验)。
+在前一节 [“你好 React Navigation”](hello-react-navigation.md) 中，我们定义了一个有两个路由的堆栈导航器（`Home` 和 `Details`），但是我们没有学习如何让用户从 `Home` 导航到 `Details`（虽然我们确实学习了在代码中如何改变*最初的*路由，但强迫用户克隆存储库并在我们的代码中更改路由来看到另一个屏幕上，可以说是能想象得到的最糟糕的用户体验）。
 
 如果这是一个 web 浏览器,我们能够这样写：
 
@@ -24,7 +24,7 @@ sidebar_label: 在屏幕之间移动
 </a>
 ```
 
-我们将执行与后者类似的操作，但是不使用 `window.location` 全局对象。我们将使用传递给屏幕组件的`navigation` prop。
+我们将执行与后者类似的操作，但是不使用 `window.location` 全局对象。我们将使用传递给屏幕组件的 `navigation` prop。
 
 ## 导航到一个新的屏幕
 
@@ -53,8 +53,8 @@ function HomeScreen({ navigation }) {
 
 让我们分析一下：
 
-- `navigation`：`navigation` prop 在堆栈导航器中被传递到每个**屏幕组件** （[定义](glossary-of-terms.md#screen-component)）（在后面的 “深度 Navigation prop” 中有详细介绍）。
-- `navigate('Details')`：我们使用想要将用户移动到的路由名称调用 `navigate` 函数 (在 `navigation` prop 中—命名是最难的!) 。
+- `navigation`：`navigation` prop 在堆栈导航器中被传递到每个**屏幕组件** （[定义](glossary-of-terms.md#screen-component屏幕组件)）（在后面的 “深度 Navigation prop” 中有详细介绍）。
+- `navigate('Details')`：我们使用 `navigate` 函数调用想要将用户移动到的路由名称(在 `navigation` prop 中命名是最难的!) 。
 
 > 如果我们使用未在导航器中定义的路由名称调用 `navigation.navigate`，在开发版本中将打印一个错误，在生产版本中什么都不会发生。换句话说，我们只能导航到已经在导航器中定义的路由——我们不能导航到任意的组件。
 
@@ -123,8 +123,7 @@ function DetailsScreen({ navigation }) {
 }
 ```
 
-> 在 Android 上，React Navigation hooks 与硬件的后退按钮反应，并在用户按下`goBack()` 函数时为您触发它，因此它的行为与用户预期的一样。
-
+> 在 Android 上，React Navigation hooks 与硬件的后退按钮交互，并在用户按下它时为您触发 `goBack()` 函数，因此它的行为与用户预期的一样。
 另一个常见的需求是能够返回*多个*屏幕——例如，如果您在堆栈中有多个屏幕，并且想要将它们全部删除以返回到第一个屏幕。在本例中，我们知道我们想返回 `Home`，所以我们可以使用 `navigate('Home')`（而不是 `push！` 试试看有什么不同）。另一种选择是 `navigation.popToTop()`，它返回到堆栈中的第一个屏幕。
 
 <samp id="pop-to-top" />
@@ -155,7 +154,7 @@ function DetailsScreen({ navigation }) {
 
 - 我们可以任意次调用 `navigation.push('RouteName')`，它会继续推送路由。
 
-- 标题栏将自动显示一个返回按钮，但是您可以通过编程调用 `navigation.goBack()`返回。在 Android 上，硬件的后退按钮就像预期的那样工作。
+- 标题栏将自动显示一个返回按钮，但是您可以通过编程调用 `navigation.goBack()` 返回。在 Android 上，硬件的后退按钮就像预期的那样工作。
 
 - 您可以使用 `navigator.navigation ('RouteName')` 返回堆栈中的一个现有屏幕，使用 `navigator. poptotop()` 返回栈中的第一个屏幕。
 

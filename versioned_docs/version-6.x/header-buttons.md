@@ -39,7 +39,7 @@ function StackScreen() {
 
 ## 导航栏与其屏幕组件的交互
 
-在某些情况下，标题中的组件需要与屏幕组件交互。对于这个用例，我们需要使用 `navigation.setOptions` 来更新我们的选项。通过在屏幕组件内部使用 `navigation.setOptions`，我们可以访问屏幕的 props、状态、context等。
+在某些情况下，标题中的组件需要与屏幕组件交互。对于这个用例，我们需要使用 `navigation.setOptions` 来更新我们的选项。通过在屏幕组件内部使用 `navigation.setOptions`，我们可以访问屏幕的 props、状态、context 等。
 
 <samp id="header-interaction">header interaction</samp>
 
@@ -66,8 +66,8 @@ function HomeScreen({ navigation }) {
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
-    // 使用`setOptions`来更新我们之前指定的按钮
-    // 现在按钮包含了一个 `onPress` 处理程序来更新计数
+    // 使用 setOptions 来更新我们之前指定的按钮
+    // 现在按钮包含了一个 onPress 处理程序来更新计数
     navigation.setOptions({
       headerRight: () => (
         <Button onPress={() => setCount((c) => c + 1)} title="Update count" />

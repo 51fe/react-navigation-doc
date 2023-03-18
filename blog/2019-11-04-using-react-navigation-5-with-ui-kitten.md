@@ -26,7 +26,7 @@ The UI Kitten team started actively using React Navigation alpha and we're proud
 
 React Navigation 5 is nothing else rather than simplifying navigation structure in your app.
 
-```js
+```ts
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -57,7 +57,7 @@ Assuming that your app users will need to authorize before getting to the home s
 
 Open [./src/navigation/auth.navigator.tsx`](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppRoute } from './app-routes';
@@ -78,7 +78,7 @@ In this example, we're using a `createStackNavigator` function to create simple 
 
 In [./src/navigation/app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and replace the placeholder screen with Auth Navigator. This will make authentication screens to be the starter point of your app.
 
-```js
+```ts
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
@@ -101,7 +101,7 @@ Say, our app has both in-progress and finished tasks. So, you should separate th
 
 Open [./src/navigation/todo.navigator.tsx`](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/todo.navigator.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { AppRoute } from './app-routes';
@@ -128,7 +128,7 @@ export const TodoNavigator = (): React.ReactElement => (
 
 The code above will enable you to navigate with gestures between `In Progress` screen and `Done` screen, but not set up the Tab Bar. Open [./src/scenes/todo/todo-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/todo/todo-tab-bar.component.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { TabBar, Tab, Divider, TabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
@@ -168,7 +168,7 @@ With the code above we render `TabBar` component with two tabs inside: one per e
 
 Finally, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and add the `TodoNavigator` as a Home screen. Now you're able to navigate the home screen with todo tabs after sign in.
 
-```js
+```ts
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
@@ -193,7 +193,7 @@ Sometimes you may want your app to contain tabs at the bottom. Here is the main 
 
 Let's start by creating another navigator for the second tab. The first one will be used for Todo screens. Open [./src/navigation/profile.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/profile.navigator.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppRoute } from './app-routes';
@@ -212,7 +212,7 @@ This will add a simple stack navigator, just like we did it for authentication f
 
 Now we need to somehow connect `TodoNavigator` with `ProfileNavigator` . The implementation is as simple as creating a navigator for top tabs. Thanks to React Navigation, we have totally the same API for this. Open [./src/navigation/home.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/home.navigator.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TodoNavigator } from './todo.navigator';
@@ -241,7 +241,7 @@ export const HomeNavigator = (): React.ReactElement => (
 
 Just like in the case with tabs at the top, we also need to make a custom `tabBar`. Open [./src/scenes/home/home-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/home-tab-bar.component.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { BottomNavigation, BottomNavigationTab, Divider, BottomNavigationTabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SafeAreaLayoutElement, SaveAreaInset } from '../../components/safe-area-layout.component';
@@ -282,7 +282,7 @@ Using the code above we render `BottomNavigation` component with two tabs inside
 
 Then, open [app.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/app.navigator.tsx) file and replace the `TodoNavigator` with `HomeNavigator`:
 
-```js
+```ts
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthNavigator } from './auth.navigator';
@@ -307,7 +307,7 @@ At the final stage of this guide, we will describe how to create the drawer navi
 
 Usually, the drawer menu is available in app on the home screen, so let's add it to `HomeNavigator`. Open [./src/navigation/home.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/home.navigator.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -355,7 +355,7 @@ In this example, we've implemented a Drawer Navigator with `createDrawerNavigato
 
 Just like Top/Bottom tab navigators, the drawer navigator also has a special property for declaring custom drawer view. Use a `drawerContent` property to pass the custom view to the navigator. Open [./src/scenes/home/home-drawer.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/home/home-drawer.component.tsx) file and add the following code:
 
-```js
+```ts
 import React from 'react';
 import { Drawer, DrawerItem, DrawerElement DrawerItemElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset } from '../../components/safe-area-layout.component';
@@ -394,7 +394,7 @@ Due to the use of this code, we render `Drawer` component with two actions insid
 
 The next thing to do is to modify the Todo tab bar by adding a menu icon to open a drawer. Open [./src/scenes/todo/todo-tab-bar.component.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/scenes/todo/todo-tab-bar.component.tsx) file and paste the following code:
 
-```js
+```ts
 import React from 'react';
 import { TabBar, Tab, Divider, TabElement } from '@ui-kitten/components';
 import { SafeAreaLayout, SaveAreaInset, SafeAreaLayoutElement } from '../../components/safe-area-layout.component';
@@ -443,7 +443,7 @@ The new React Navigation has great TypeScript support and exports type definitio
 
 Let's add some type definitions for Auth screens. For this purpose, open [./src/navigation/auth.navigator.tsx](https://github.com/artyorsh/react-navigation-ex-demo/blob/complete-exmaples/src/navigation/auth.navigator.tsx) and paste the following code:
 
-```js
+```ts
 import { RouteProp } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AppRoute } from './app-routes';

@@ -94,7 +94,7 @@ navigation.setParams({
 });
 ```
 
-> 注意：避免使用 `setParams` 来更新屏幕选项，例如 `title` 等。如果您需要更新选项，请使用 [`setOptions`](navigation-prop.md#setOptions)来代替。
+> 注意：避免使用 `setParams` 来更新屏幕选项，例如 `title` 等。如果您需要更新选项，请使用 [`setOptions`](navigation-prop.md#setoptions)来代替。
 
 ## 将参数传递到上一个屏幕
 
@@ -173,7 +173,7 @@ navigation.navigate('Account', {
 
 您也可以将路由对象看作一个URL。如果您的屏幕有一个 URL, URL中应该包含什么？参数不应该包含您认为不应该出现在URL中的数据。这通常意味着您应该保留尽可能少的数据来确定屏幕是什么。想象一下访问一个购物网站，当您看到产品列表时，URL通常包含类别名称，排序类型，任何过滤器等，它不包含屏幕上显示的实际产品列表。
 
-例如，如果您有一个 `Profile` 屏幕。当导航到它时，您可能会想在参数中传递 user对象：
+例如，如果您有一个 `Profile` 屏幕。当导航到它时，您可能会想在参数中传递 `user` 对象：
 
 ```js
 // 不要这样做
@@ -218,7 +218,6 @@ navigation.navigate('Profile', { userId: 'jane' });
 
 - `navigate` 和 `push` 接受第二个可选参数，以便将参数传递给需要导航到的路由。例如 `navigation.navigate('RouteName', { paramName: 'value' })`
 - 您可以通过屏幕内的 `route.params` 读取参数
-- 您可以使用 `navigator . setparams` 更新屏幕的参数
-- Initial params can be passed via the `initialParams` prop on `Screen`
+- 您可以使用 `navigator.setparams` 更新屏幕的参数
 - 初始参数可以通过屏幕上的 `initialParams` prop 传递
 - 参数应该包含显示屏幕所需的最小数据，仅此而已

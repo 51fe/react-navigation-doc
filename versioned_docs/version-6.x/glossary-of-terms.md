@@ -51,7 +51,7 @@ const StackNavigator = (
 
 组件名称中的后缀 `Screen` 完全是可选的，但这是一种常用的约定；我们可以叫它 `Michael`，这也是一样的。
 
-我们前面看到，我们的屏幕组件是由 `navigation` prop 提供的。需要注意的是，*只有当屏幕被 React Navigation 渲染一个路由时 (例如，在 `navigation.navigate` 中) 才会发生这种情况*。例如，如如果我们将 `DetailsScreen` 渲染为 `HomeScreen` 的子组件，那么 `DetailsScreen` 将不会有`navigation` prop，当您在主屏幕上按下 “Go to Details... again” 按钮，应用程序将抛出一个典型的 JavaScript 异常——“undefined is not an object（未定义的不是一个对象）”。
+我们前面看到，我们的屏幕组件是由 `navigation` prop 提供的。需要注意的是，*只有当屏幕被 React Navigation 渲染一个路由时 (例如，在 `navigation.navigate` 中) 才会发生这种情况*。例如，如果我们将 `DetailsScreen` 渲染为 `HomeScreen` 的子组件，那么 `DetailsScreen` 将不会有`navigation` prop，当您在主屏幕上按下 “Go to Details... again” 按钮，应用程序将抛出一个典型的 JavaScript 异常——“undefined is not an object（未定义的不是一个对象）”。
 
 ```js
 function HomeScreen() {
@@ -77,9 +77,9 @@ function HomeScreen() {
 - `dispatch`：将向路由器发送一个 action
 - `navigate`、`goBack` 等可以以一种方便的方式来发送 action
 
-导航器还可以接受一个 navigation prop，如果父导航器有的话，它们应该从父导航器中获取。
+导航器还可以接受一个 navigation prop，如果有父导航器的话，它们应该从父导航器中获取。
 
-更多细节，请参阅["Navigation prop文档"](Navigation-prop.md)。
+更多细节，请参阅[“Navigation prop文档”](Navigation-prop.md)。
 
 [“Route prop参考”](Route-prop.md)部分对此有更详细的介绍，描述了解决方法，并提供了关于 `Route` prop 中其他可用属性的更多信息。
 

@@ -29,7 +29,7 @@ function StackScreen() {
 
 ## 在标题中使用参数
  
-为了在标题中使用参数，我们需要将屏幕的 `options` prop 设置为一个返回配置对象的函数。使用 `this.props` 而不使用 `options` 的尝试可能很诱人，但是因为它是在组件渲染之前定义的，所以 `this` 并不引用组件的实例，因此没有可用的Props。相反，如果我们将 `options` 设置为一个函数，那么 React Navigation 将用一个包含 `{ navigation, route }` 的对象调用它———在这种情况下，我们所关心的是 `route`，它与作为 `route` prop 传递给屏幕 props 的对象是同一对象。您可能还记得，我们可以通过 `route.params` 获得参数，下面我们来提取参数并使用它作为标题。
+为了在标题中使用参数，我们需要将屏幕的 `options` prop 设置为一个返回配置对象的函数。使用 `this.props` 而不使用 `options` 的尝试可能很诱人，但是因为它是在组件渲染之前定义的，所以 `this` 并不引用组件的实例，因此没有可用的 props。相反，如果我们将 `options` 设置为一个函数，那么 React Navigation 将用一个包含 `{ navigation, route }` 的对象调用它———在这种情况下，我们所关心的是 `route`，它与作为 `route` prop 传递给屏幕 props 的对象是同一对象。您可能还记得，我们可以通过 `route.params` 获得参数，下面我们来提取参数并使用它作为标题。
 
 <samp id="params-in-title">params in title</samp>
 

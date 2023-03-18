@@ -41,7 +41,7 @@ function StackScreen() {
 
 ## 导航栏与其屏幕组件的交互
 
-为了能够与屏幕组件交互，我们需要使用 `navigation.setOptions` 来定义我们的按钮而不是 `options` prop。通过使用 `navigation.setOptions` 在屏幕组件内部，我们可以访问屏幕的 props、状态、context等。
+为了能够与屏幕组件交互，我们需要使用 `navigation.setOptions` 来定义我们的按钮而不是 `options` prop。通过使用 `navigation.setOptions` 在屏幕组件内部，我们可以访问屏幕的 props、状态、context 等。
 
 <samp id="header-interaction">header interaction</samp>
 
@@ -79,15 +79,15 @@ function HomeScreen({ navigation }) {
 
 `createNativeStackNavigator` 为返回按钮提供了特定于平台的默认值。在 iOS 上，这包括一个按钮旁边的标签，当标题符合可用空间时，它显示上一个屏幕的标题，否则它显示为 “Back”（返回）。
 
-您可以使用 `headerBackTitle` 和 `headerTruncatedBackTitle`（[参阅更多信息](native-stack-navigator.md#headerbacktitle)) 来更改标签行为。
+您可以使用 `headerBackTitle` 和 `headerTruncatedBackTitle`（[参阅更多信息](stack-navigator.md#headerbacktitle)) 来更改标签行为。
 
-要自定义返回按钮图像，可以使用 `headerBackImage`（[参阅更多信息](native-stack-navigator.md#headerbackimage)）。
+要自定义返回按钮图像，可以使用 `headerBackImage`（[参阅更多信息](stack-navigator.md#headerbackimage)）。
 
 ## 重写返回按钮
 
 只要用户有可能从当前屏幕返回，返回按钮就会在堆栈导航器中自动渲染——换句话说，只要堆栈中有多个屏幕，就会渲染返回按钮。
 
-一般来说，这就是您想要的。但在某些情况下，您可能更希望定制返回按钮，而不是通过上面提到的选项，在这种情况下，您可以将 `headerLeft` 选项设置为将要渲染的 React 元素，就像我们对 `headerRight` 所做的那样。另外，`headerLeft` 选项还接受一个 React 组件，例如，可以使用该组件重写返回按钮的 onPress 行为。更多相关内容请参阅 [API 参考](native-stack-navigator.md#headerleft)。
+一般来说，这就是您想要的。但在某些情况下，您可能更希望定制返回按钮，而不是通过上面提到的选项，在这种情况下，您可以将 `headerLeft` 选项设置为将要渲染的 React 元素，就像我们对 `headerRight` 所做的那样。另外，`headerLeft` 选项还接受一个 React 组件，例如，可以使用该组件重写返回按钮的 onPress 行为。更多相关内容请参阅 [API 参考](stack-navigator.md#headerleft)。
 
 如果您想保留返回的视图，并且只覆盖 `onPress` 方法，那么您可以从 `@response -navigation/stack` 导入 [HeaderBackButton](https://github.com/react-navigation/react-navigation/blob/main/packages/stack/src/views/Header/HeaderBackButton.tsx)，并将该组件分配给 `headerLeft` 选项。
 

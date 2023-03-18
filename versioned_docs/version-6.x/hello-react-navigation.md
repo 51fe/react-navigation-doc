@@ -95,13 +95,15 @@ function App() {
     </NavigationContainer>
   );
 }
+
+export default App;
 ```
 
 现在我们的堆栈有两个*路由*，一个 `Home` 路由和一个 `Details` 路由。可以使用 `Screen` 组件指定路由。`Screen` 组件接受一个 `name` prop，它对应于我们将用于导航的路由的名称，以及一个`component` prop，它对应于它将渲染的组件。
 
 这里，`Home` 路由对应 `HomeScreen` 组件，而 `Details` 路由对应 `DetailsScreen` 组件。堆栈的初始路由是 `Home` 路由。尝试将其更改为 `Details` 并重新加载应用（正如您所期望的那样，React Native 的快速刷新不会更新从 `initialRouteName` 的更改），注意您现在将看到 `Details` 屏幕。然后将其更改为 `Home` 并再次重新加载。
 
-> 注意：`component` prop 接受组件，而不是渲染函数。不要传递内联函数（例如`component={() => <HomeScreen />}`），否则当父组件重新呈现时，您的组件将会卸载和重新加载失去所有的状态。请参阅[传递额外的 props ](#passing-additional-props)以获取替代方案。
+> 注意：`component` prop 接受组件，而不是渲染函数。不要传递内联函数（例如`component={() => <HomeScreen />}`），否则当父组件重新呈现时，您的组件将会卸载和重新加载失去所有的状态。请参阅[传递额外的 props ](#传递额外 props)以获取替代方案。
 
 ### 指定的选项
 
@@ -145,7 +147,7 @@ function App() {
 
 - `Stack.Navigator` 是一个组件，它将路由配置作为子组件，带有用于配置的附加 prop，并渲染我们的内容。
 
-- 每个 `Stack.Screen` 组件接受一个 `name` prop，它引用路由的名称，而 `component` prop 指定为路由渲染的组件。这是 2 个必需的 props。
+- 每个 `Stack.Screen` 组件接受一个 `name` prop，它引用路由的名称，而 `component` prop 指定为路由渲染的组件。这是两个必需的 props。
 
 - 要指定堆栈中的初始路由是什么，提供 `initialRouteName` 作为导航器的 prop。
 
