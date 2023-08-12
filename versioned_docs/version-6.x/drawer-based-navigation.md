@@ -4,7 +4,8 @@ title: 抽屉导航
 sidebar_label: 抽屉导航
 ---
 
-Common pattern in navigation is to use drawer from left (sometimes right) side for navigating between screens.
+
+常见的导航模式是使用从左（有时是右）侧的抽屉来在屏幕之间导航。
 
 <div style={{ display: 'flex', margin: '16px 0' }}>
   <video playsInline autoPlay muted loop>
@@ -12,12 +13,11 @@ Common pattern in navigation is to use drawer from left (sometimes right) side f
   </video>
 </div>
 
-Before continuing, first install and configure [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer) and its dependencies following the [installation instructions](drawer-navigator.md#installation).
+在继续之前，首先按照[安装说明](drawer-navigator.md#installation)安装和配置[`@react-navigation/drawer`]及其依赖项。
 
-## Minimal example of drawer-based navigation
+## 基于绘图器的导航的最小示例
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:
-(swipe right to open)
+导入 `@react-navigation/drawer` 以使用此抽屉导航：（向右滑动以打开）
 
 <samp id="drawer-based-navigation" />
 
@@ -60,9 +60,9 @@ export default function App() {
 }
 ```
 
-## Opening and closing drawer
+## 打开和关闭抽屉
 
-To open and close drawer, use the following helpers:
+打开和关闭抽屉，使用以下帮助：
 
 <samp id="drawer-open-close-toggle" />
 
@@ -71,7 +71,7 @@ navigation.openDrawer();
 navigation.closeDrawer();
 ```
 
-If you would like to toggle the drawer you call the following:
+你可以调用以下函数来切换抽屉：
 
 <samp id="drawer-open-close-toggle" />
 
@@ -79,7 +79,7 @@ If you would like to toggle the drawer you call the following:
 navigation.toggleDrawer();
 ```
 
-Each of these functions, behind the scenes, are simply dispatching actions:
+这些函数背后只是在调度动作。
 
 <samp id="drawer-dispatch" />
 
@@ -89,7 +89,7 @@ navigation.dispatch(DrawerActions.closeDrawer());
 navigation.dispatch(DrawerActions.toggleDrawer());
 ```
 
-If you would like to determine if drawer is open or closed, you can do the following:
+如果你想确定抽屉是打开还是关闭的，你可以这样做：
 
 ```js
 import { useDrawerStatus } from '@react-navigation/drawer';

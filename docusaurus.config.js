@@ -27,10 +27,13 @@ module.exports = {
       darkTheme: require('prism-react-renderer/themes/dracula'),
     },
     algolia: {
-      appId: 'bh4d9od16a',
-      apiKey: '2378e3838ac984c220a994bfc0e0420f',
-      indexName: 'react-navigation',
-      algoliaOptions: {},
+      appId: '7HM51APE8X',
+      apiKey: '21d4cbc8407f0b9f989586de8b540eff',
+      indexName: 'react_navigation',
+      algoliaOptions: {
+        facetFilters: ["tags:VERSION"],
+        hitsPerPage: 5 
+      }
     },
     navbar: {
       title: 'React Navigation',

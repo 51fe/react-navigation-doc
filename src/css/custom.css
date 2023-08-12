@@ -49,10 +49,6 @@
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
 }
 
-body {
-  font-family: Consolas, 'Courier New', monospace;
-}
-
 .menu {
   font-weight: var(--ifm-font-weight-normal);
 }

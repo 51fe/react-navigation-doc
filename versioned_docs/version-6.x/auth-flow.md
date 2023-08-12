@@ -4,24 +4,24 @@ title: 身份认证流程
 sidebar_label: 身份认证流程
 ---
 
-Most apps require that a user authenticates in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
+大部分应用程序都要求用户通过某种方式进行身份验证，以便访问与用户或其他私人内容相关联的数据。通常，流程如下：
 
-- The user opens the app.
-- The app loads some authentication state from encrypted persistent storage (for example, [`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/)).
-- When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
-- When the user signs out, we clear the authentication state and send them back to authentication screens.
+- 用户打开应用程序。
+- 应用程序从加密持久存储中加载某些身份验证状态(例如，[`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/))。
+- 当加载状态时，用户将看到身份验证屏幕或主应用程序，具体取决于是否加载了有效的身份验证状态。
+- 用户退出时，我们将清除身份验证状态，然后将其发送回身份验证屏幕。
 
-> Note: We say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
+> 注意：我们说 "身份验证屏幕"，因为通常不止一个。您可以有一个带有用户名和密码字段的主屏幕，另一个用于“忘记密码”，另一个用于注册。
 
-## What we need
+## 我们需要什么
 
-This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button, we expect to not be able to go back to the authentication flow.
+这就是我们希望从身份验证流程中得到的行为：当用户登录时，我们希望抛弃身份验证流程的状态，卸载所有与身份验证相关的屏幕，当我们按下硬件后退按钮时，我们希望无法返回到身份验证流程。
 
-## How it will work
+## 它将如何工作
 
-We can define different screens based on some condition. For example, if the user is signed in, we can define `Home`, `Profile`, `Settings` etc. If the user is not signed in, we can define `SignIn` and `SignUp` screens.
+我们可以根据某些条件定义不同的屏幕。例如，如果用户已登录，我们可以定义`Home`，`Profile`，`Settings`等屏幕。如果用户未登录，我们可以定义`SignIn`和`SignUp`屏幕。
 
-For example:
+例如：
 
 <samp id="conditional-screens" />
 
@@ -40,29 +40,29 @@ isSignedIn ? (
 );
 ```
 
-When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
+当我们像这样定义屏幕时，当 `isSignedIn` 为 `true` 时，React Navigation 只会看到 `Home`、`Profile` 和 `Settings` 屏幕，当它为 `false` 时，React Navigation 将看到 `SignIn` 和 `SignUp` 屏幕。这使得用户未登录时无法导航到 `Home`、`Profile` 和 `Settings` 屏幕，并且用户登录时无法导航到 `SignIn` 和 `SignUp` 屏幕。
 
-This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
+这种模式已经被其他路由库（如 React Router）使用了很长时间，通常被称为“受保护的路由”。在这里，我们需要用户登录的屏幕是“受保护的”，如果用户未登录，则无法通过其他方式导航到这些屏幕。
 
-The magic happens when the value of the `isSignedIn` variable changes. Let's say, initially `isSignedIn` is `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
+当 `isSignedIn` 变量的值发生变化时，就会发生魔法。假设，最初 `isSignedIn` 是 `false`。这意味着，显示 `SignIn` 或 `SignUp` 屏幕。用户登录后，`isSignedIn` 的值将更改为 `true`。React Navigation 将看到 `SignIn` 和 `SignUp` 屏幕不再定义，因此它将删除它们。然后它会自动显示 `Home` 屏幕，因为这是当 `isSignedIn` 为 `true` 时定义的第一个屏幕。
 
-The example shows stack navigator, but you can use the same approach with any navigator.
+示例显示堆栈导航器，但您可以使用任何导航器的相同方法。
 
-By conditionally defining different screens based on a variable, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
+通过根据变量有条件地定义不同的屏幕，我们可以以一种简单的方式实现身份验证流，而不需要额外的逻辑来确保显示正确的屏幕。
 
-## Don't manually navigate when conditionally rendering screens
+## 在条件渲染屏幕时不要手动导航
 
-It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSignedIn` changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
+重要的是要注意，当使用这样的设置时，你**不要手动导航**到`Home`屏幕，而是通过调用`navigation.navigate('Home')`或任何其他方法。当`isSignedIn`更改时，**React Navigation将自动导航到正确的屏幕** - 当`isSignedIn`变为`true`时，`Home`屏幕，当`isSignedIn`变为`false`时，到`SignIn`屏幕。如果您尝试手动导航，则会出现错误。
 
-## Define our screens
+## 定义我们的屏幕
 
-In our navigator, we can conditionally define appropriate screens. For our case, let's say we have 3 screens:
+在我们的导航器中，我们可以有条件地定义适当的屏幕。对于我们的情况，假设我们有3个屏幕：
 
-- `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
-- `SignInScreen` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
-- `HomeScreen` - This is the screen we show if the user is already signed in.
+- `SplashScreen` - 当我们恢复令牌时，这将显示一个闪屏或加载屏幕。
+- `SignInScreen` - 如果用户尚未登录（我们找不到令牌），这是我们显示的屏幕。
+- `HomeScreen` - 如果用户已经登录，这是我们显示的屏幕。
 
-So our navigator will look like:
+所以我们的导航器看起来像：
 
 <samp id="conditional-screens-advanced" />
 
@@ -94,14 +94,15 @@ return (
 );
 ```
 
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+在上面的代码片段中，`isLoading` 表示我们仍在检查是否有 token。这通常可以通过检查 `SecureStore` 中是否有 token 并验证 token 来完成。在我们获取 token 并且它是有效的之后，我们需要设置 `userToken`。我们还有另一个状态叫做 `isSignout`，用于在登出时有不同的动画。
 
-The main thing to notice is that we're conditionally defining screens based on these state variables:
+要注意的主要事情是，我们根据这些状态变量有条件地定义屏幕：
 
-- `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
-- `Home` screen is only defined if `userToken` is non-null (user is signed in)
+- 只有当 `userToken` 为 `null` 时（用户未登录）才定义 `SignIn` 屏幕
+- 只有当 `userToken` 为非 `null` 时（用户已登录）才定义 `Home` 屏幕
 
-Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
+在这里，我们有条件地为每种情况定义一个屏幕。但是你也可以定义多个屏幕。例如，当用户未登录时，你可能还想定义密码重置、注册等屏幕。同样，对于登录后可访问的屏幕，你可能有不止一个屏幕。我们可以使用 `React.Fragment` 来定义多个屏幕：
+
 
 ```js
 state.userToken == null ? (
@@ -118,26 +119,26 @@ state.userToken == null ? (
 );
 ```
 
-> If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+ 如果你的登录相关屏幕和其他屏幕在两个不同的 Stack 导航器中，我们建议使用单个 Stack 导航器并将条件放在内部，而不是使用两个不同的导航器。这使得在登录/注销期间有一个正确的过渡动画成为可能。
 
-## Implement the logic for restoring the token
+## 实现恢复令牌的逻辑
 
-> Note: The following is just an example of how you might implement the logic for authentication in your app. You don't need to follow it as is.
+> 注意：以下只是一个示例，演示了如何在应用程序中实现身份验证逻辑。你不需要按照它来做。
 
-From the previous snippet, we can see that we need 3 state variables:
+从上一个片段中，我们可以看到我们需要3个状态变量：
 
-- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `SecureStore`
-- `isSignout` - We set this to `true` when user is signing out, otherwise set it to `false`
-- `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
+- `isLoading` - 当我们尝试检查我们是否已经在 `SecureStore` 中保存了令牌时，我们将其设置为 `true`
+- `isSignout` - 当用户退出时，我们将其设置为 `true`，否则将其设置为 `false`
+- `userToken` - 用户的令牌。如果它不为空，我们假设用户已登录，否则没有。
 
-So we need to:
+所以我们需要：
 
-- Add some logic for restoring token, signing in and signing out
-- Expose methods for signing in and signing out to other components
+- 添加一些逻辑来恢复令牌，登录和登出
+- 将登录和登出的方法暴露给其他组件
 
-We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead. In fact, in bigger apps, a global state management library is more suitable for storing authentication tokens. You can adapt the same approach to your state management library.
+在本指南中，我们将使用 `React.useReducer` 和 `React.useContext`。但是，如果您使用 Redux 或 Mobx 等状态管理库，则可以使用它们来替代此功能。实际上，在更大的应用程序中，全局状态管理库更适合存储身份验证令牌。您可以将相同的方法应用于您的状态管理库。
 
-First we'll need to create a context for auth where we can expose necessary methods:
+首先，我们需要创建一个 auth 上下文，我们可以在其中暴露必要的方法：
 
 ```js
 import * as React from 'react';
@@ -242,9 +243,9 @@ export default function App({ navigation }) {
 }
 ```
 
-## Fill in other components
+## 填充其他组件
 
-We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
+我们不会讨论如何实现身份验证屏幕的文本输入和按钮，这是导航范围之外的。我们只是填充一些占位符内容。
 
 ```js
 function SignInScreen() {
@@ -272,9 +273,9 @@ function SignInScreen() {
 }
 ```
 
-## Removing shared screens when auth state changes
+## 当授权状态改变时移除共享屏幕
 
-Consider the following example:
+考虑以下示例：
 
 ```js
 isSignedIn ? (
@@ -292,11 +293,11 @@ isSignedIn ? (
 );
 ```
 
-Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown in both cases. This also means that if the signin state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
+这里我们有一些特定的屏幕，例如 `SignIn`，`Home` 等，它们只有在登录状态下才会显示。但是我们也有 `Help` 屏幕，它可以在两种情况下显示。这也意味着，如果用户在 `Help` 屏幕上时登录状态改变，他们将会留在 `Help` 屏幕上。
 
-This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen. To make this work, we can use the [`navigationKey` prop](screen.md#navigationkey). When the `navigationKey` changes, React Navigation will remove all the screen.
+这可能是一个问题，我们可能希望用户被带到 `SignIn` 屏幕或 `Home` 屏幕，而不是让他们留在 `Help` 屏幕上。为了解决这个问题，我们可以使用 [`navigationKey` prop](screen.md#navigationkey)。当 `navigationKey` 改变时，React Navigation 将会移除所有屏幕。
 
-So our updated code will look like following:
+所以我们更新后的代码将会像下面这样：
 
 ```js
 <>
@@ -315,7 +316,7 @@ So our updated code will look like following:
 </>
 ```
 
-If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigationkey) to remove all of the screens in the group. For example:
+如果你有一堆共享的屏幕，你也可以使用 [`navigationKey` with a `Group`](group.md#navigationkey) 来移除组中的所有屏幕。例如：
 
 ```js
 <>

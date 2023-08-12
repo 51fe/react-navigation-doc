@@ -4,36 +4,36 @@ title: 支持的安全区域
 sidebar_label: 支持的安全区域
 ---
 
-By default, React Navigation tries to ensure that the elements of the navigators display correctly on devices with notches (e.g. iPhone X) and UI elements which may overlap the app content. Such items include:
+默认情况下，React Navigation 试图确保导航器元素在带有切口（例如 iPhone X）和可能重叠应用程序内容的 UI 元素的设备上正确显示。这些项目包括：
 
-- Physical notches
-- Status bar overlay
-- Home activity indicator on iOS
-- Navigation bar on Android
+- 物理切口
+- 状态栏覆盖
+- iOS 上的主屏幕活动指示器
+- Android 上的导航栏
 
-The area not overlapped by such items is referred to as "safe area".
+这些项目不重叠的区域被称为“安全区域”。
 
-We try to apply proper insets on the UI elements of the navigators to avoid being overlapped by such items. The goal is to (a) maximize usage of the screen (b) without hiding content or making it difficult to interact with by having it obscured by a physical display cutout or some operating system UI.
+我们尝试在导航器的 UI 元素上应用适当的插图，以避免被这些项目重叠。目标是（a）最大化屏幕的使用（b）而不隐藏内容或使其难以通过物理显示器切口或某些操作系统 UI 进行交互。
 
-While React Navigation handles safe areas for the built-in UI elements by default, your own content may also need to handle it to ensure that content isn't hidden by these items.
+虽然 React Navigation 默认情况下处理内置 UI 元素的安全区域，但您自己的内容也可能需要处理它，以确保内容不会被这些项目隐藏。
 
-It's tempting to solve (a) by wrapping your entire app in a container with padding that ensures all content will not be occluded. But in doing so, we waste a bunch of space on the screen, as pictured in the image on the left below. What we ideally want is the image pictured on the right.
+诱人的是通过包装整个应用程序在一个容器中，确保所有内容不会被遮挡来解决（a）。但是这样做，我们浪费了屏幕上的一大堆空间，如下图左侧所示。我们理想的情况是右侧图片所示。
 
 ![Notch on the iPhone X](/assets/iphoneX/00-intro.png)
 
-While React Native exports a `SafeAreaView` component, this component only supports iOS 10+ with no support for older iOS versions or Android. In addition, it also has some issues, i.e. if a screen containing safe area is animating, it causes jumpy behavior. So we recommend to use the `useSafeAreaInsets` hook from the [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) library to handle safe areas in a more reliable way.
+虽然 React Native 导出了一个 `SafeAreaView` 组件，但是这个组件只支持 iOS 10+，不支持旧版本的 iOS 或 Android。此外，它还有一些问题，例如，如果一个包含安全区域的屏幕正在动画，它会导致跳跃行为。因此，我们建议使用来自 [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) 库的 `useSafeAreaInsets` 钩子来更可靠地处理安全区域。
 
-> Note: The `react-native-safe-area-context` library also exports a `SafeAreaView` component. While it works on Android, it also has the same issues related to jumpy behavior when animating. So we recommend always using the `useSafeAreaInsets` hook instead and avoid using the `SafeAreaView` component.
+> 注意：`react-native-safe-area-context` 库也导出了一个 `SafeAreaView` 组件。虽然它在 Android 上可以工作，但是它在动画时也有与跳跃行为相关的相同问题。因此，我们建议始终使用 `useSafeAreaInsets` 钩子，并避免使用 `SafeAreaView` 组件。
 
-The rest of this guide gives more information on how to support safe areas in React Navigation.
+本指南的其余部分提供了有关如何在 React Navigation 中支持安全区域的更多信息。
 
-## Hidden/Custom Header or Tab Bar
+##隐藏/自定义标题栏或标签栏
 
 ![Default React Navigation Behavior](/assets/iphoneX/01-iphonex-default.png)
 
-React Navigation handles safe area in the default header. However, if you're using a custom header, it's important to ensure your UI is within the safe area.
+React Navigation 处理默认头部的安全区域。 但是，如果您使用自定义头部，则重要的是确保您的UI在安全区域内。
 
-For example, if I render nothing for the `header` or `tabBar`, nothing renders
+例如，如果我为 `header` 或 `tabBar` 渲染空白，则不会渲染任何内容。
 
 <samp id="hidden-components" />
 
@@ -86,7 +86,7 @@ export default function App() {
 
 ![Text hidden by iPhoneX UI elements](/assets/iphoneX/02-iphonex-content-hidden.png)
 
-To fix this issue you can apply safe area insets on your content. This can be achieved using the `useSafeAreaInsets` hook from the `react-native-safe-area-context` library:
+要修复此问题，您可以在内容上应用安全区域插入。 这可以通过使用来自 `react-native-safe-area-context` 库的 `useSafeAreaInsets` 钩子来实现：
 
 <samp id="safe-area-example" />
 

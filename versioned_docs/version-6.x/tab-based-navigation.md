@@ -4,17 +4,17 @@ title: 选项卡导航
 sidebar_label: 选项卡导航
 ---
 
-Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
+在移动应用中，最常见的导航样式可能是基于标签的导航。 这可以是屏幕底部的标签，或者在标题下方的标签（甚至可以代替标题）。
 
-This guide covers [`createBottomTabNavigator`](bottom-tab-navigator.md). You may also use [`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md) and [`createMaterialTopTabNavigator`](material-top-tab-navigator.md) to add tabs to your application.
+本指南涵盖[`createBottomTabNavigator`](bottom-tab-navigator.md)。 您还可以使用[`createMaterialBottomTabNavigator`](material-bottom-tab-navigator.md)和[`createMaterialTopTabNavigator`](material-top-tab-navigator.md)将标签添加到应用程序中。
 
-Before continuing, first install [`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs):
+在继续之前，首先安装[`@react-navigation/bottom-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/bottom-tabs)：
 
 ```bash npm2yarn
 npm install @react-navigation/bottom-tabs
 ```
 
-## Minimal example of tab-based navigation
+## 基于选项卡的导航的最小示例
 
 <samp id="tab-based-navigation-minimal" />
 
@@ -54,9 +54,9 @@ export default function App() {
 }
 ```
 
-## Customizing the appearance
+## 定制外观
 
-This is similar to how you would customize a stack navigator &mdash; there are some properties that are set when you initialize the tab navigator and others that can be customized per-screen in `options`.
+这类似于如何自定义堆栈导航器 - 当您初始化选项卡导航器时，会设置一些属性，而其他属性可以在 `options` 中每个屏幕进行自定义。
 
 <samp id="tab-based-navigation-icons" />
 
@@ -98,15 +98,15 @@ export default function App() {
 }
 ```
 
-Let's dissect this:
+让我们分解一下：
 
-- `tabBarIcon` is a supported option in bottom tab navigator. So we know we can use it on our screen components in the `options` prop, but in this case chose to put it in the `screenOptions` prop of `Tab.Navigator` in order to centralize the icon configuration for convenience.
-- `tabBarIcon` is a function that is given the `focused` state, `color`, and `size` params. If you take a peek further down in the configuration you will see `tabBarActiveTintColor` and `tabBarInactiveTintColor`. These default to the iOS platform defaults, but you can change them here. The `color` that is passed through to the `tabBarIcon` is either the active or inactive one, depending on the `focused` state (focused is active). The `size` is the size of the icon expected by the tab bar.
-- Read the [full API reference](bottom-tab-navigator.md) for further information on `createBottomTabNavigator` configuration options.
+- `tabBarIcon` 是底部标签导航器中支持的选项。因此，我们知道我们可以在屏幕组件的 `options` 属性中使用它，但在这种情况下，为了方便起见，选择将其放在 `Tab.Navigator` 的 `screenOptions` 属性中。
+- `tabBarIcon` 是一个函数，它被给予 `focused` 状态，`color` 和 `size` 参数。如果你更深入地查看配置，你会看到 `tabBarActiveTintColor` 和 `tabBarInactiveTintColor`。这些默认为 iOS 平台默认值，但你可以在这里更改它们。传递给 `tabBarIcon` 的 `color` 要么是活动的，要么是不活动的，取决于 `focused` 状态（focused 是活动的）。`size` 是标签栏期望的图标大小。
+- 有关 `createBottomTabNavigator` 配置选项的更多信息，请参阅[完整的 API 参考](bottom-tab-navigator.md)。
 
-## Add badges to icons
+## 为图标添加徽章
 
-Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` option](bottom-tab-navigator.md#tabbarbadge) to do it:
+有时候我们想在一些图标上添加徽章。您可以使用 [`tabBarBadge` 选项](bottom-tab-navigator.md#tabbarbadge)来实现：
 
 <samp id="tab-based-navigation-badges" />
 
@@ -114,13 +114,13 @@ Sometimes we want to add badges to some icons. You can use the [`tabBarBadge` op
 <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarBadge: 3 }} />
 ```
 
-From UI perspective this component is ready to use, but you still need to find some way to pass down the badge count properly from somewhere else, like using [React Context](https://reactjs.org/docs/context.html), [Redux](https://redux.js.org/), [MobX](https://mobx.js.org/) or [event emitters](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js).
+从 UI 角度来看，这个组件已经可以使用了，但是你仍然需要找到一些方法来正确地从其他地方传递徽章计数，比如使用[React Context](https://reactjs.org/docs/context.html)、[Redux](https://redux.js.org/)、[MobX](https://mobx.js.org/)或[事件派发器](https://github.com/facebook/react-native/blob/master/Libraries/vendor/emitter/EventEmitter.js)。
 
-![Tabs with badges](/assets/navigators/tabs/tabs-badges.png)
+![带有徽章的标签](/assets/navigators/tabs/tabs-badges.png)
 
-## Jumping between tabs
+## 在标签之间跳转
 
-Switching from one tab to another has a familiar API &mdash; `navigation.navigate`.
+从一个标签切换到另一个标签有一个熟悉的 API——`navigation.navigate`。
 
 <samp id="tab-based-navigation-switching" />
 
@@ -147,9 +147,9 @@ function SettingsScreen({ navigation }) {
 }
 ```
 
-## A stack navigator for each tab
+## 每个标签都有一个堆栈导航器
 
-Usually tabs don't just display one screen &mdash; for example, on your Twitter feed, you can tap on a tweet and it brings you to a new screen within that tab with all of the replies. You can think of this as there being separate navigation stacks within each tab, and that's exactly how we will model it in React Navigation.
+通常，标签不仅仅显示一个屏幕——例如，在您的 Twitter 提要中，您可以点击一条推文，它会带您进入该标签中的新屏幕，其中包含所有回复。您可以将其视为每个标签中都有单独的导航堆栈，这正是我们在 React Navigation 中的模型。
 
 <samp id="tab-based-navigation-stack" />
 
@@ -228,12 +228,12 @@ export default function App() {
 }
 ```
 
-## Why do we need a TabNavigator instead of TabBarIOS or some other component?
+我们为什么需要使用 TabNavigator 而不是 TabBarIOS 或其他组件？
 
-It's common to attempt to use a standalone tab bar component without integrating it into the navigation library you use in your app. In some cases, this works fine! You should be warned, however, that you may run into some frustrating unanticipated issues when doing this.
+通常会试图在不将其集成到应用程序中使用的导航库中的情况下使用单独的标签栏组件。在某些情况下，这可以很好地工作！但是，您应该警告您，这样做可能会遇到一些令人沮丧的意外问题。
 
-For example, React Navigation's tab navigator takes care of handling the Android back button for you, while standalone components typically do not. Additionally, it is more difficult for you (as the developer) to perform actions such as "jump to this tab and then go to this screen" if you need to call into two distinct APIs for it. Lastly, mobile user interfaces have numerous small design details that require that certain components are aware of the layout or presence of other components &mdash; for example, if you have a translucent tab bar, content should scroll underneath it and the scroll view should have an inset on the bottom equal to the height of the tab bar so you can see all of the content. Double tapping the tab bar should make the active navigation stack pop to the top of the stack, and doing it again should scroll the active scroll view in that stack scroll to the top. While not all of these behaviors are implemented out of the box yet with React Navigation, they will be and you will not get any of this if you use a standalone tab view component.
+例如，React Navigation 的标签导航器会为您处理 Android 返回按钮，而单独的组件通常不会。此外，如果您需要调用两个不同的 API，作为开发人员，您要执行“跳转到此选项卡然后转到此屏幕”等操作就更加困难。最后，移动用户界面有许多小的设计细节，要求某些组件必须知道其他组件的布局或存在 - 例如，如果您有一个半透明的标签栏，则内容应滚动在其下方，并且滚动视图的底部应具有等于标签栏高度的插入，以便您可以看到所有内容。双击标签栏应使活动导航堆栈弹出到堆栈的顶部，再次这样做应使该堆栈中的活动滚动视图滚动到顶部。虽然 React Navigation 尚未实现所有这些行为，但它们将会实现，如果您使用单独的标签视图组件，您将不会得到任何这些。
 
-## A tab navigator contains a stack and you want to hide the tab bar on specific screens
+标签导航器包含堆栈，您希望在特定屏幕上隐藏标签栏
 
-[See the documentation here](hiding-tabbar-in-screens.md)
+[请参阅此处的文档](hiding-tabbar-in-screens.md)
